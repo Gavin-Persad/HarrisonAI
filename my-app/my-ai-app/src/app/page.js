@@ -1,10 +1,28 @@
-import Image from 'next/image';
-import styles from './page.module.css';
+'use client';
 
-export default function Home() {
+import { useChat } from 'ai/react';
+
+export default function Chat() {
+	const { messages, input, handleInputChange, handleSubmit } = useChat();
 	return (
-		<main className={styles.main}>
-			<div className={styles.description}></div>
-		</main>
+		<div className="chatbot">
+			{messages.map((m) => (
+				<div
+					key={m.id}
+					className="chatHistory">
+					{m.role === 'user' ? 'User: ' : 'AI: '}
+					{m.content}
+				</div>
+			))}
+
+			<form onSubmit={handleSubmit}>
+				<input
+					className="inputField"
+					value={input}
+					placeholder="Ask me anything!"
+					onChange={handleInputChange}
+				/>
+			</form>
+		</div>
 	);
 }
