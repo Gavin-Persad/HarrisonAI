@@ -1,6 +1,7 @@
 'use client';
 
 import { useChat } from 'ai/react';
+import styles from './page.module.css';
 
 export default function Chat() {
 	const { messages, input, handleInputChange, handleSubmit } = useChat();
